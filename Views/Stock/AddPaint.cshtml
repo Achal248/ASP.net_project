@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Add Paint";
+}
+
+<style>
+    .profile-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+    }
+
+    .profile-box {
+        width: 520px;
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+        .profile-box h4 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+    .form-group {
+        margin-bottom: 18px;
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        outline: none;
+    }
+
+    .btn-submit {
+        width: 100%;
+        padding: 10px;
+        background-color: #0d6efd; /* BLUE */
+        border: none;
+        color: white;
+        font-size: 15px;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+
+        .btn-submit:hover {
+            background-color: #0b5ed7;
+        }
+</style>
+
+<div class="profile-wrapper">
+    <div class="profile-box">
+
+        <h4>Add Paint Stock</h4>
+
+        <form asp-controller="Stock" asp-action="AddPaint" method="post">
+
+            <div class="form-group">
+                <input type="text" name="paintName" class="form-input" placeholder="Paint Name" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="brand" class="form-input" placeholder="Brand" required />
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="category" class="form-input" placeholder="Category" required />
+            </div>
+
+            <div class="form-group">
+                <input type="number" name="quantity" class="form-input" placeholder="Quantity (L)" required />
+            </div>
+
+            <div class="form-group">
+                <input type="number" name="price" class="form-input" placeholder="Price / L" required />
+            </div>
+
+            <button type="submit" class="btn-submit">Add to Stock</button>
+
+        </form>
+
+    </div>
+</div>

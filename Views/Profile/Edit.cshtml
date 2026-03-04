@@ -1,0 +1,57 @@
+﻿@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<form asp-controller="Profile" asp-action="Update" method="post">
+
+    <div style="display:flex; justify-content:center; margin-top:50px;">
+        <div style="
+            width:520px;
+            padding:35px;
+            background:#f9f9f9;
+            border-radius:12px;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+        ">
+
+            <h2 style="text-align:center; margin-bottom:25px;">
+                Edit Profile
+            </h2>
+
+            <label>Name</label>
+            <input type="text" name="name"
+                   value="@ViewBag.Name"
+                   style="width:100%; padding:12px; margin-bottom:15px;" />
+
+            <label>Email</label>
+            <input type="email" name="email"
+                   value="@ViewBag.Email"
+                   style="width:100%; padding:12px; margin-bottom:15px;" />
+
+            <label>Phone</label>
+            <input type="text" name="phone"
+                   value="@ViewBag.Phone"
+                   style="width:100%; padding:12px; margin-bottom:15px;" />
+
+            <label>Address</label>
+            <textarea name="address"
+                      style="width:100%; padding:12px; margin-bottom:25px;">@ViewBag.Address</textarea>
+
+            <div style="display:flex; justify-content:center; gap:20px;">
+                <button type="submit"
+                        class="btn-primary"
+                        style="padding:12px 35px; font-size:16px;">
+                    Update
+                </button>
+
+                <a asp-controller="Home"
+                   asp-action="Index"
+                   class="btn-delete"
+                   style="padding:12px 35px; font-size:16px; text-decoration:none;">
+                    Logout
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</form>

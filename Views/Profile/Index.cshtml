@@ -1,0 +1,52 @@
+﻿@{
+    ViewData["Title"] = "My Profile";
+}
+
+<div style="display:flex; justify-content:center; margin-top:50px;">
+    <div style="
+        width:520px;
+        padding:35px;
+        background:#f9f9f9;
+        border-radius:12px;
+        box-shadow:0 4px 12px rgba(0,0,0,0.15);
+        text-align:center;
+    ">
+
+        <h2 style="margin-bottom:25px;">My Profile</h2>
+
+        <div style="text-align:left;">
+            <label>Name</label>
+            <input type="text" value="@ViewBag.Name" readonly
+                   style="width:100%; padding:12px; margin-bottom:12px;" />
+
+            <label>Email</label>
+            <input type="text" value="@ViewBag.Email" readonly
+                   style="width:100%; padding:12px; margin-bottom:12px;" />
+
+            <label>Phone</label>
+            <input type="text" value="@ViewBag.Phone" readonly
+                   style="width:100%; padding:12px; margin-bottom:12px;" />
+
+            <label>Address</label>
+            <input type="text" value="@ViewBag.Address" readonly
+                   style="width:100%; padding:12px; margin-bottom:25px;" />
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:20px;">
+            <a asp-controller="Profile"
+               asp-action="Edit"
+               class="btn-primary"
+               style="padding:12px 35px; font-size:16px; text-decoration:none;">
+                Edit Profile
+            </a>
+
+            <a asp-controller="Home"
+               asp-action="Index"
+               class="btn-delete"
+               style="padding:12px 35px; font-size:16px; text-decoration:none;">
+                Logout
+            </a>
+        </div>
+
+    </div>
+</div>

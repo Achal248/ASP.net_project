@@ -1,0 +1,373 @@
+﻿/* =========================
+   GLOBAL
+========================= */
+body {
+    margin: 0;
+    background-color: #ffffff;
+    font-family: "Segoe UI", sans-serif;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+.cf-navbar {
+    height: 58px;
+    background-color: #f6f6f6;
+    display: flex;
+    align-items: center;
+}
+
+.cf-navbar-inner {
+    width: 100%;
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.cf-logo {
+    background-color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.logo-color {
+    color: #ff6b6b;
+}
+
+.logo-fill {
+    color: #0d6efd;
+}
+
+.cf-menu {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+    margin: 0;
+    padding: 0;
+}
+
+    .cf-menu li a {
+        text-decoration: none;
+        font-size: 15px;
+        font-weight: 600;
+        color: #1e90ff;
+    }
+
+        .cf-menu li a:hover {
+            color: #0d6efd;
+        }
+
+/* =========================
+   PAGE CONTENT
+========================= */
+main {
+    padding: 24px;
+}
+
+/* =========================
+   HOME DASHBOARD
+========================= */
+.dashboard-wrapper {
+    padding: 40px 20px;
+}
+
+.dashboard-cards {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.dashboard-card {
+    width: 320px;
+    height: 140px;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 10px 18px rgba(0,0,0,0.15);
+    padding: 20px;
+    position: relative;
+}
+
+    .dashboard-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 6px;
+        width: 100%;
+        border-radius: 18px 18px 0 0;
+    }
+
+    .dashboard-card.purple::before {
+        background-color: #6f42c1;
+    }
+
+    .dashboard-card.blue::before {
+        background-color: #0d6efd;
+    }
+
+    .dashboard-card h4 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+    }
+
+.dashboard-number {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 12px;
+    display: inline-block;
+}
+
+/* =========================
+   RECENT ACTIVITY
+========================= */
+.recent-activity {
+    max-width: 700px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 14px rgba(0,0,0,0.12);
+    padding: 20px;
+}
+
+    .recent-activity h4 {
+        margin-top: 0;
+        margin-bottom: 16px;
+        font-weight: 700;
+    }
+
+.activity-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #e6e6e6;
+    font-size: 14px;
+}
+
+    .activity-row:last-child {
+        border-bottom: none;
+    }
+
+.qty {
+    font-weight: 600;
+}
+
+/* =========================
+   STOCK CATEGORY PAGES
+========================= */
+.stock-title {
+    text-align: center;
+    margin: 30px 0 20px;
+    font-weight: 700;
+}
+
+.stock-categories {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+}
+
+.stock-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 220px);
+    gap: 80px;
+}
+
+.stock-card {
+    width: 220px;
+    height: 200px;
+    background-color: #ffffff;
+    border-radius: 26px;
+    position: relative;
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 15px;
+    box-shadow: 0 10px 16px rgba(0,0,0,0.18);
+    transition: all 0.3s ease;
+}
+
+    .stock-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 55%;
+        height: 7px;
+        background-color: #1e90ff;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+    }
+
+    .stock-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 18px 28px rgba(0,0,0,0.25);
+    }
+
+/* =========================
+   STOCK TABLE PAGES
+========================= */
+.stock-container {
+    padding: 30px 60px;
+}
+
+.stock-toolbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stock-search {
+    padding: 10px 15px;
+    width: 260px;
+    border-radius: 25px;
+    border: 1px solid #999;
+    outline: none;
+}
+
+.table-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.stock-table {
+    width: 90%;
+    border-collapse: collapse;
+    background: white;
+}
+
+    .stock-table th,
+    .stock-table td {
+        border: 1px solid #777;
+        padding: 12px;
+        text-align: center;
+    }
+
+    .stock-table thead {
+        background-color: #f3f3f3;
+        font-weight: 600;
+    }
+
+/* =========================
+   STATUS
+========================= */
+.status {
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+    .status.ok {
+        background-color: #6ddf6d;
+    }
+
+    .status.low {
+        background-color: #ff8a8a;
+    }
+
+/* =========================
+   BUTTONS
+========================= */
+.btn-primary {
+    background-color: #2aa4f4;
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+    .btn-primary:hover {
+        background-color: #1c8edc;
+    }
+
+.btn-edit {
+    background-color: #2aa4f4;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn-delete {
+    background-color: #2aa4f4;
+    color: white;
+    border: none;
+    padding: 6px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+/* =========================================================
+   BILLING PAGE (FINAL CLEAN VERSION)
+========================================================= */
+
+.billing-title {
+    text-align: center;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+.billing-top {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+}
+
+/* IMPORTANT FIX */
+.table-wrapper {
+    display: flex;
+    flex-direction: column; /* 👈 keeps summary below table */
+    align-items: center;
+}
+
+.qty-input {
+    width: 55px;
+    padding: 6px;
+    text-align: center;
+    border-radius: 6px;
+    border: 1px solid #aaa;
+}
+
+.bill-summary {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+}
+
+.summary-box {
+    background: #f5f5f5;
+    padding: 22px 40px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
+    width: 280px;
+}
+
+    .summary-box p {
+        display: flex;
+        justify-content: space-between;
+        margin: 8px 0;
+        font-size: 14px;
+    }
+
+    .summary-box .grand-total {
+        font-weight: 700;
+        font-size: 16px;
+    }

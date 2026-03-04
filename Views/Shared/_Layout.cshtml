@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"] - ColorFill</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header class="cf-navbar">
+        <div class="cf-navbar-inner">
+
+            <div class="cf-logo">
+                <img src="~/images/logo.jpeg" alt="ColorFill Logo" height="60" />
+            </div>
+
+            <ul class="cf-menu">
+                <li>
+                    <a asp-controller="Home" asp-action="Index">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Stock" asp-action="Index">
+                        Stock
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Bill" asp-action="Index">
+                        Bill
+                    </a>
+                </li>
+
+                <li>
+                    <a asp-controller="Profile" asp-action="Index">
+                        Profile
+                    </a>
+                </li>
+            </ul>
+
+        </div>
+    </header>
+
+    <!-- PAGE CONTENT -->
+    <main>
+        @RenderBody()
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿@{
+	ViewData["Title"] = "Stock - Putty";
+}
+
+<div class="stock-container">
+
+	<h2 class="stock-title">Stock - Putty</h2>
+
+	<div class="stock-toolbar">
+		<input type="text"
+			   class="stock-search"
+			   placeholder="Search by name or brand" />
+
+		<button type="button" class="btn-primary" onclick="location.href='/Stock/AddPutty'">
+			Add Putty
+		</button>
+		<button type="button" class="btn-primary" onclick="addToBill()">Add to Bill</button>
+	</div>
+
+	<div class="table-wrapper">
+		<table class="stock-table">
+			<thead>
+				<tr>
+					<th>Select</th>
+					<th>Putty Name</th>
+					<th>Brand</th>
+					<th>Category</th>
+					<th>Quantity(Kg)</th>
+					<th>Price/Kg</th>
+					<th>Status</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@if (TempData["PuttyName"] != null)
+				{
+					<tr>
+						<td><input type="checkbox" /></td>
+						<td>@TempData["PuttyName"]</td>
+						<td>@TempData["Brand"]</td>
+						<td>@TempData["Category"]</td>
+						<td>@TempData["Quantity"]</td>
+						<td>@TempData["Price"]</td>
+						<td><span class="status ok">Ok</span></td>
+						<td>
+							<button class="btn-edit">Edit</button>
+							<button class="btn-delete">Delete</button>
+						</td>
+					</tr>
+				}
+				<tr>
+					<td><input type="checkbox" name="selectedPaints" value="White Cement" /></td>
+					<td>White Cement</td>
+					<td>Birla White</td>
+					<td>Interior</td>
+					<td>120</td>
+					<td>₹180</td>
+					<td><span class="status ok">Ok</span></td>
+					<td>
+						<button type="button" class="btn-edit">Add</button>
+						<button type="button" class="btn-delete">Delete</button>
+					</td>
+				</tr>
+
+				<tr>
+					<td><input type="checkbox" name="selectedPaints" value="Acrylic" /></td>
+					<td>Acrylic</td>
+					<td>Asians Paints</td>
+					<td>Interior</td>
+					<td>15</td>
+					<td>₹220</td>
+					<td><span class="status low">Low</span></td>
+					<td>
+						<button type="button" class="btn-edit">Add</button>
+						<button type="button" class="btn-delete">Delete</button>
+					</td>
+				</tr>
+
+				<tr>
+					<td><input type="checkbox" name="selectedPaints" value="Polymer" /></td>
+					<td>Polymer</td>
+					<td>Birla White</td>
+					<td>Interior</td>
+					<td>60</td>
+					<td>₹210</td>
+					<td><span class="status ok">Ok</span></td>
+					<td>
+						<button type="button" class="btn-edit">Add</button>
+						<button type="button" class="btn-delete">Delete</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>
+
+<script>
+	function addToBill() {
+		let items = [];
+		document.querySelectorAll('input[type="checkbox"][name="selectedPaints"]:checked').forEach(cb => items.push(cb.value));
+		let billItems = localStorage.getItem("billItems");
+		billItems = billItems ? billItems.split("|") : [];
+		items.forEach(i => { if(!billItems.includes(i)) billItems.push(i); });
+		localStorage.setItem("billItems", billItems.join("|"));
+		window.location.href = '/Bill/Index';
+	}
+</script>

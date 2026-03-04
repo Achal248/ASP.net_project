@@ -1,0 +1,157 @@
+﻿@{
+    ViewData["Title"] = "Bill";
+    var paints = ViewBag.Paints as string[];
+}
+
+<div class="stock-container">
+
+    <h2 class="stock-title">Bill</h2>
+
+    <div class="table-wrapper">
+        <table class="stock-table">
+            <thead>
+                <tr>
+                    <th>Paint Name</th>
+                    <th>Price / L</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+
+            <tbody id="billBody">
+                <!-- JS FILLS DATA -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- ✅ CENTERED SUMMARY BOX -->
+    <div style="display:flex; justify-content:center; margin-top:30px;">
+        <div class="summary-box"
+             style="
+                min-width:320px;
+                text-align:center;
+                padding:20px;
+                border-radius:10px;
+                background:#f9f9f9;
+                box-shadow:0 4px 10px rgba(0,0,0,0.1);
+             ">
+            <p>Subtotal: <span id="subTotal">₹0</span></p>
+            <p>GST (18%): <span id="gst">₹0</span></p>
+            <h3>Grand Total: <span id="grandTotal">₹0</span></h3>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    // ================= REAL PRICE LIST =================
+    const priceList = {
+        "Tractor Emulsion": 180,
+        "Premium Emulsion": 220,
+        "Royal": 210,
+        "Apex Ultima": 260,
+        "WeatherCoat": 240,
+        "White Cement": 180,
+        "Acrylic": 220,
+        "Polymer": 210,
+        "Exterior": 180,
+        "Waterproof": 220,
+        "Interior Wall Primer": 180,
+        "Exterior Wall Primer": 220,
+        "Metal Primer": 210,
+        "Wood Primer": 220,
+        "Cement Primer": 210
+    };
+
+    // ================= SAVE DATA FROM POST =================
+    @if (paints != null)
+    {
+            <text>
+                // Add newly posted items to localStorage
+                const newItems = "@string.Join("|", paints)".split("|");
+                const existingItems = localStorage.getItem("billItems");
+                let allItems = existingItems ? existingItems.split("|") : [];
+                newItems.forEach(i => { if(!allItems.includes(i)) allItems.push(i); });
+                localStorage.setItem("billItems", allItems.join("|"));
+            </text>
+    }
+
+    const billBody = document.getElementById("billBody");
+    const subTotalSpan = document.getElementById("subTotal");
+    const gstSpan = document.getElementById("gst");
+    const grandTotalSpan = document.getElementById("grandTotal");
+
+    // ================= RENDER BILL =================
+    function renderBill() {
+        const data = localStorage.getItem("billItems");
+
+        if (!data || data === "") {
+            billBody.innerHTML = `
+                <tr>
+                    <td colspan="5" style="text-align:center;">No items in bill</td>
+                </tr>`;
+            updateSummary(0);
+            return;
+        }
+
+        const items = data.split("|");
+        billBody.innerHTML = "";
+
+        items.forEach(paint => {
+            const price = priceList[paint] || 0;
+            billBody.innerHTML += `
+                <tr>
+                    <td>${paint}</td>
+                    <td>₹${price}</td>
+                    <td>
+                        <input type="number" value="1" min="1" onchange="calculateTotal()" />
+                    </td>
+                    <td class="row-total">₹${price}</td>
+                    <td>
+                        <button onclick="removeItem('${paint}')" class="btn-delete">Remove</button>
+                    </td>
+                </tr>`;
+        });
+
+        calculateTotal();
+    }
+
+    // ================= CALCULATE TOTAL =================
+    function calculateTotal() {
+        let subtotal = 0;
+
+        document.querySelectorAll("#billBody tr").forEach(row => {
+            const paint = row.children[0].innerText;
+            const price = priceList[paint] || 0;
+            const qty = parseInt(row.querySelector("input").value);
+
+            const total = price * qty;
+            row.querySelector(".row-total").innerText = "₹" + total;
+            subtotal += total;
+        });
+
+        updateSummary(subtotal);
+    }
+
+    function updateSummary(subtotal) {
+        const gst = subtotal * 0.18;
+        const grand = subtotal + gst;
+
+        subTotalSpan.innerText = "₹" + subtotal;
+        gstSpan.innerText = "₹" + gst.toFixed(2);
+        grandTotalSpan.innerText = "₹" + grand.toFixed(2);
+    }
+
+    // ================= REMOVE ITEM =================
+    function removeItem(name) {
+        let items = localStorage.getItem("billItems");
+        if (!items) return;
+
+        let arr = items.split("|").filter(x => x !== name);
+        localStorage.setItem("billItems", arr.join("|"));
+        renderBill();
+    }
+
+    renderBill();
+</script>
