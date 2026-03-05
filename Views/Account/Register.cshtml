@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Register</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+</head>
+
+<body>
+
+    <div class="auth-wrapper">
+
+        <div class="auth-card register-card">
+
+            <h2>Create Account</h2>
+
+            <form asp-controller="Account" asp-action="Register" method="post">
+
+                <input type="text" name="Name" placeholder="Enter Name" class="auth-input" required />
+
+                <input type="email" name="Email" placeholder="Enter Email" class="auth-input" required />
+
+                <input type="text" name="Phone" placeholder="Enter Phone" class="auth-input" required />
+
+                <input type="text" name="Address" placeholder="Enter Address" class="auth-input" required />
+
+                <input type="password" name="Password" placeholder="Enter Password" class="auth-input" required />
+
+                <button type="submit" class="auth-btn">Register</button>
+
+            </form>
+
+            <p style="margin-top:20px;">
+                Already have an account?
+                <a asp-controller="Account" asp-action="Login">Login</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

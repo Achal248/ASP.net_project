@@ -3,7 +3,7 @@
 ========================= */
 body {
     margin: 0;
-    background-color: #ffffff;
+    background-color: #f2f2f2;
     font-family: "Segoe UI", sans-serif;
 }
 
@@ -214,7 +214,7 @@ main {
     }
 
 /* =========================
-   STOCK TABLE PAGES
+   STOCK TABLE
 ========================= */
 .stock-container {
     padding: 30px 60px;
@@ -238,7 +238,8 @@ main {
 
 .table-wrapper {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 .stock-table {
@@ -294,7 +295,8 @@ main {
         background-color: #1c8edc;
     }
 
-.btn-edit {
+.btn-edit,
+.btn-delete {
     background-color: #2aa4f4;
     color: white;
     border: none;
@@ -304,19 +306,12 @@ main {
 }
 
 .btn-delete {
-    background-color: #2aa4f4;
-    color: white;
-    border: none;
-    padding: 6px 16px;
-    border-radius: 20px;
-    cursor: pointer;
     margin-left: 5px;
 }
 
-/* =========================================================
-   BILLING PAGE (FINAL CLEAN VERSION)
-========================================================= */
-
+/* =========================
+   BILLING PAGE
+========================= */
 .billing-title {
     text-align: center;
     font-size: 32px;
@@ -329,13 +324,6 @@ main {
     display: flex;
     justify-content: flex-end;
     margin-bottom: 20px;
-}
-
-/* IMPORTANT FIX */
-.table-wrapper {
-    display: flex;
-    flex-direction: column; /* 👈 keeps summary below table */
-    align-items: center;
 }
 
 .qty-input {
@@ -370,4 +358,57 @@ main {
     .summary-box .grand-total {
         font-weight: 700;
         font-size: 16px;
+    }
+
+/* LOGIN REGISTER DESIGN */
+
+.auth-wrapper {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #efefef;
+}
+
+.auth-card {
+    width: 520px; /* little wider */
+    padding: 90px 80px; /* increase height */
+    background: #ffffff; /* make box visible */
+    border-radius: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+}
+.auth-input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 18px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+
+.auth-btn {
+    margin-top: 20px;
+    padding: 10px 25px;
+    border: none;
+    border-radius: 20px;
+    background: #2b9bd6;
+    color: white;
+    cursor: pointer;
+}
+
+/* REGISTER PAGE EXTRA HEIGHT */
+
+.register-card {
+    padding: 110px 90px; /* makes box taller */
+    width: 550px; /* slightly wider */
+}
+
+    .register-card .auth-input {
+        margin-top: 22px;
+        padding: 14px;
+    }
+
+    .register-card .auth-btn {
+        margin-top: 28px;
+        padding: 12px 28px;
     }

@@ -1,0 +1,43 @@
+﻿@model ASP.net_project.Models.Login
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+</head>
+
+<body>
+
+    <div class="auth-wrapper">
+
+        <div class="auth-card">
+
+            <h2>Login</h2>
+
+            <form asp-controller="Account" asp-action="Login" method="post">
+
+                <input asp-for="Email" placeholder="Enter email" class="auth-input" />
+
+                <input asp-for="Password" type="password" placeholder="Password" class="auth-input" />
+
+                <button type="submit" class="auth-btn">Login</button>
+
+            </form>
+            <p style="margin-top:20px;">
+                Don't have an account?
+                <a asp-controller="Account" asp-action="Register">Register</a>
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
