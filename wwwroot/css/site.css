@@ -413,34 +413,69 @@ main {
         padding: 12px 28px;
     }
 
-.category-page {
+.category-container {
+    width: 90%;
+    margin: auto;
+    margin-top: 30px;
+}
+
+/* Header */
+.category-header {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    width: 100%;
+    margin-bottom: 30px;
 }
 
-.category-title {
-    margin-bottom: 20px;
-}
-
-.add-btn {
-    margin-bottom: 20px;
-}
-
+/* Form Styling */
 .category-form {
-    width: 300px;
+    width: 350px;
     margin-bottom: 30px;
 }
 
     .category-form input,
     .category-form textarea {
-        margin-bottom: 10px;
+        width: 100%;
+        padding: 10px 12px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        margin-bottom: 12px;
+        font-size: 14px;
     }
 
+        .category-form input:focus,
+        .category-form textarea:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0,123,255,0.2);
+        }
+
+/* Cards Grid */
 .category-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-    width: 80%;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 28px; /* 👈 spacing between cards */
+    margin-top: 20px;
+    align-items: start;
 }
+
+/* Card Design */
+.stock-card {
+    text-decoration: none;
+    padding: 28px;
+    border-radius: 12px;
+    background: #f7f7f7;
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+    transition: 0.25s ease;
+    display: block;
+    height: 150px; /* important */
+    box-sizing: border-box;
+}
+
+    /* Card Hover */
+    .stock-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+    }

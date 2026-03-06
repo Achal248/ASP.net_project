@@ -2,16 +2,18 @@
     ViewData["Title"] = "Category";
 }
 
-<div class="category-page">
+<div class="category-container">
 
-    <h2 class="category-title">Categories</h2>
+    <div class="category-header">
 
-    <!-- Add Button -->
-    <button onclick="showForm()" class="btn btn-primary add-btn">
-        Add Category
-    </button>
+        <h2>Categories</h2>
 
-    <!-- Form -->
+        <button onclick="showForm()" class="btn btn-primary">
+            Add Category
+        </button>
+
+    </div>
+
     <div id="categoryForm" class="category-form" style="display:none;">
 
         <input type="text" id="catName" placeholder="Category Name" class="form-control" />
@@ -24,7 +26,6 @@
 
     </div>
 
-    <!-- Cards -->
     <div class="category-grid" id="categoryGrid">
 
         <a asp-controller="Stock" asp-action="Interior" class="stock-card">
@@ -46,3 +47,35 @@
     </div>
 
 </div>
+<script>
+
+    function showForm(){
+        document.getElementById("categoryForm").style.display = "block";
+    }
+
+    function addCategory(){
+
+        let name = document.getElementById("catName").value;
+
+        if(name == ""){
+            alert("Category name required");
+            return;
+        }
+
+        let grid = document.getElementById("categoryGrid");
+
+        let card = document.createElement("a");
+
+        card.className = "stock-card";
+
+        card.innerText = name;
+
+        card.href = "/Stock";
+
+        grid.appendChild(card);
+
+        document.getElementById("catName").value="";
+        document.getElementById("catDesc").value="";
+    }
+
+</script>
