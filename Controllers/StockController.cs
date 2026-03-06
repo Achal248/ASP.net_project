@@ -7,8 +7,9 @@ namespace ASP.net_project.Controllers
         // ===============================
         // MAIN CATEGORY PAGE
         // ===============================
-        public IActionResult Index()
+        public IActionResult Index(string category)
         {
+            ViewBag.SelectedCategory = category;
             return View();
         }
 

@@ -412,3 +412,35 @@ main {
         margin-top: 28px;
         padding: 12px 28px;
     }
+
+.category-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.category-title {
+    margin-bottom: 20px;
+}
+
+.add-btn {
+    margin-bottom: 20px;
+}
+
+.category-form {
+    width: 300px;
+    margin-bottom: 30px;
+}
+
+    .category-form input,
+    .category-form textarea {
+        margin-bottom: 10px;
+    }
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+    width: 80%;
+}

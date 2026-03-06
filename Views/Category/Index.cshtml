@@ -1,0 +1,48 @@
+﻿@{
+    ViewData["Title"] = "Category";
+}
+
+<div class="category-page">
+
+    <h2 class="category-title">Categories</h2>
+
+    <!-- Add Button -->
+    <button onclick="showForm()" class="btn btn-primary add-btn">
+        Add Category
+    </button>
+
+    <!-- Form -->
+    <div id="categoryForm" class="category-form" style="display:none;">
+
+        <input type="text" id="catName" placeholder="Category Name" class="form-control" />
+
+        <textarea id="catDesc" placeholder="Description (optional)" class="form-control"></textarea>
+
+        <button onclick="addCategory()" class="btn btn-success">
+            Save
+        </button>
+
+    </div>
+
+    <!-- Cards -->
+    <div class="category-grid" id="categoryGrid">
+
+        <a asp-controller="Stock" asp-action="Interior" class="stock-card">
+            Interior
+        </a>
+
+        <a asp-controller="Stock" asp-action="Exterior" class="stock-card">
+            Exterior
+        </a>
+
+        <a asp-controller="Stock" asp-action="Putty" class="stock-card">
+            Putty
+        </a>
+
+        <a asp-controller="Stock" asp-action="Primer" class="stock-card">
+            Primer
+        </a>
+
+    </div>
+
+</div>
