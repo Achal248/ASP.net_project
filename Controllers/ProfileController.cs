@@ -7,8 +7,8 @@ namespace ASP.net_project.Controllers
         // PROFILE PAGE
         public IActionResult Index()
         {
-            ViewBag.Name = TempData["Name"] ?? "Achal Gediya";
-            ViewBag.Email = TempData["Email"] ?? "achal@email.com";
+            ViewBag.Name = TempData["Name"] ?? "admin";
+            ViewBag.Email = TempData["Email"] ?? "adminl@email.com";
             ViewBag.Phone = TempData["Phone"] ?? "9999999999";
             ViewBag.Address = TempData["Address"] ?? "Rajkot, Gujarat";
 
