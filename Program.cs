@@ -20,11 +20,19 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-// ✅ Enable Session Middleware (must come after UseRouting and before UseAuthorization)
+// ✅ Enable Session Middleware
 app.UseSession();
 
 app.UseAuthorization();
 
+
+// ✅ SplashScreen route (FIRST PAGE)
+app.MapControllerRoute(
+name: "splash",
+pattern: "{controller=SplashScreen}/{action=SplashScreen}/{id?}");
+
+
+// ✅ Your existing route (UNCHANGED)
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
