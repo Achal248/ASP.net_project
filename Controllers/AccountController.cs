@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ASP.net_project.Models;
+
 namespace ASP.net_project.Controllers
 {
     public class AccountController : Controller
-   {
+    {
         public IActionResult Login()
         {
             return View();
@@ -33,7 +34,6 @@ namespace ASP.net_project.Controllers
         [HttpPost]
         public IActionResult Register(string Name, string Email, string Phone, string Address, string Password)
         {
-            // Save in session (temporary)
             HttpContext.Session.SetString("RegEmail", Email);
             HttpContext.Session.SetString("RegPassword", Password);
 
@@ -42,7 +42,7 @@ namespace ASP.net_project.Controllers
 
         public IActionResult Logout()
         {
-            HttpContext.Session.Clear();
+            HttpContext.Session.Remove("UserName");
             return RedirectToAction("Login");
         }
     }

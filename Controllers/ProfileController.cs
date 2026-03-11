@@ -41,5 +41,12 @@ namespace ASP.net_project.Controllers
 
             return RedirectToAction("Index");
         }
+
+        // LOGOUT
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Remove("UserName");
+            return RedirectToAction("Login", "Account");
+        }
     }
 }
