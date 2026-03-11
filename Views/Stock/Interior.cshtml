@@ -128,6 +128,30 @@
     </div>
 
 </div>
+<!-- ================================ -->
+<!-- EDIT PAINT MODAL -->
+<!-- ================================ -->
+
+<div id="editModal" class="category-modal">
+
+    <div class="modal-box">
+
+        <h3>Edit Paint</h3>
+
+        <input id="editName" type="text" placeholder="Paint Name">
+        <input id="editBrand" type="text" placeholder="Brand">
+        <input id="editCategory" type="text" placeholder="Category">
+        <input id="editQuantity" type="number" placeholder="Quantity">
+        <input id="editPrice" type="number" placeholder="Price">
+
+        <div class="modal-buttons">
+            <button class="btn-primary" onclick="saveEdit()">Save</button>
+            <button onclick="closeEditModal()">Cancel</button>
+        </div>
+
+    </div>
+
+</div>
 
 <!-- ================================ -->
 <!-- ADD TO BILL JS (UNCHANGED) -->
@@ -153,4 +177,50 @@
 
         window.location.href = '/Bill/Index';
     }
+</script>
+<script>
+
+    let currentRow = null;
+
+    document.addEventListener("click", function(e){
+
+        // DELETE ROW
+        if(e.target.classList.contains("btn-delete")){
+            if(confirm("Delete this item?")){
+                let row = e.target.closest("tr");
+                row.remove();
+            }
+        }
+
+        // OPEN EDIT MODAL
+        if(e.target.classList.contains("btn-edit")){
+
+            currentRow = e.target.closest("tr");
+
+            document.getElementById("editName").value = currentRow.cells[1].innerText;
+            document.getElementById("editBrand").value = currentRow.cells[2].innerText;
+            document.getElementById("editCategory").value = currentRow.cells[3].innerText;
+            document.getElementById("editQuantity").value = currentRow.cells[4].innerText;
+            document.getElementById("editPrice").value = currentRow.cells[5].innerText;
+
+            document.getElementById("editModal").style.display = "flex";
+        }
+
+    });
+
+    function saveEdit(){
+
+        currentRow.cells[1].innerText = document.getElementById("editName").value;
+        currentRow.cells[2].innerText = document.getElementById("editBrand").value;
+        currentRow.cells[3].innerText = document.getElementById("editCategory").value;
+        currentRow.cells[4].innerText = document.getElementById("editQuantity").value;
+        currentRow.cells[5].innerText = document.getElementById("editPrice").value;
+
+        closeEditModal();
+    }
+
+    function closeEditModal(){
+        document.getElementById("editModal").style.display = "none";
+    }
+
 </script>
