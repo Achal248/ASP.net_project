@@ -1,0 +1,119 @@
+﻿@model List<ColorFill.Models.Product>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Stock Management";
+}
+
+<h2 class="mb-4">Stock Management</h2>
+
+<div class="card p-3 mb-4">
+    <form method="get" asp-action="Index" class="row g-3">
+
+        <div class="col-md-4">
+            <input type="text" name="search" value="@ViewBag.Search"
+                   class="form-control" placeholder="Search by product name..." />
+        </div>
+
+        <div class="col-md-3">
+            <select name="categoryId" class="form-select">
+                <option value="">All Categories</option>
+                @foreach (var cat in ViewBag.Categories)
+                {
+                    <option value="@cat.Id"
+                            selected="@(ViewBag.SelectedCategory != null && ViewBag.SelectedCategory == cat.Id ? "selected" : null)">
+                        @cat.Name
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <button type="submit" class="btn btn-primary w-100">Filter</button>
+        </div>
+
+        <div class="col-md-3 text-end">
+            <a asp-action="Create" class="btn btn-success w-100">+ Add New Product</a>
+        </div>
+
+    </form>
+</div>
+
+<table class="table-custom mt-4">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Cost</th>
+            <th>Selling</th>
+            <th>Qty</th>
+            <th>Status</th>
+            <th>Created</th>
+            <th>Action</th>
+            <th>Add To Bill</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.CategoryName</td>
+                    <td>₹ @item.CostPrice</td>
+                    <td>₹ @item.SellingPrice</td>
+                    <td>@item.Quantity</td>
+
+                    <!-- STATUS COLUMN FIXED -->
+                    <td>
+                        @if (item.Quantity <= item.LowStockThreshold)
+                        {
+                            <span class="badge-low">Low</span>
+                        }
+                        else
+                        {
+                            <span class="badge-ok">Ok</span>
+                        }
+                    </td>
+
+                    <td>@item.CreatedDate.ToShortDateString()</td>
+
+                    <td>
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn-figma"
+                           onclick="return confirm('Delete this product?')">
+                            Delete
+                        </a>
+                    </td>
+
+                    <td>
+                        @if (item.Quantity > 0)
+                        {
+                            <a asp-controller="Billing"
+                               asp-action="AddToBill"
+                               asp-route-id="@item.Id"
+                               class="btn-figma">
+                                🛒 Add
+                            </a>
+                        }
+                        else
+                        {
+                            <button class="btn-figma" disabled>
+                                Out of Stock
+                            </button>
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="9" class="text-center">No products found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

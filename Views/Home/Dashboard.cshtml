@@ -1,0 +1,145 @@
+﻿@*
+    Dashboard with improved UI, colors, fonts, and charts
+*@
+
+@{
+    ViewData["Title"] = "Dashboard";
+    var data = ViewBag.Data;
+
+    decimal totalSales = 0;
+    decimal totalCost = 0;
+    int totalBills = 0;
+    int lowStock = 0;
+
+    if (data != null)
+    {
+        totalSales = Convert.ToDecimal(data["TotalSales"] ?? 0);
+        totalCost = Convert.ToDecimal(data["TotalCost"] ?? 0);
+        totalBills = Convert.ToInt32(data["TotalBills"] ?? 0);
+        lowStock = Convert.ToInt32(data["LowStockCount"] ?? 0);
+    }
+
+    decimal profit = totalSales - totalCost;
+}
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+    body {
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #f9f9f9;
+    }
+
+    .dashboard-card {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 25px 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        position: relative;
+        margin-bottom: 30px;
+        transition: transform 0.3s;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+        }
+
+    .card-top-line {
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, #4CAF50, #81C784);
+        border-radius: 2px;
+        margin-bottom: 15px;
+    }
+
+    .dashboard-card h4 {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .dashboard-card h2 {
+        font-weight: 700;
+        color: #1a1a1a;
+        margin-top: 10px;
+    }
+
+    .stats-container {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+
+    .chart-container {
+        background: #ffffff;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        margin-top: 30px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="stats-container">
+        <div class="dashboard-card col-md-3">
+            <div class="card-top-line" style="background: #4CAF50;"></div>
+            <h4>Total Bills</h4>
+            <h2>@totalBills</h2>
+        </div>
+
+        <div class="dashboard-card col-md-3">
+            <div class="card-top-line" style="background: #2196F3;"></div>
+            <h4>Total Sales</h4>
+            <h2>₹ @totalSales</h2>
+        </div>
+
+        <div class="dashboard-card col-md-3">
+            <div class="card-top-line" style="background: #FF9800;"></div>
+            <h4>Profit</h4>
+            <h2>₹ @profit</h2>
+        </div>
+
+        <div class="dashboard-card col-md-3">
+            <div class="card-top-line" style="background: #F44336;"></div>
+            <h4>Low Stock Items</h4>
+            <h2>@lowStock</h2>
+        </div>
+    </div>
+
+    <!-- Example Sales Chart -->
+    <div class="chart-container">
+        <h4>Sales Trend (Last 7 Days)</h4>
+        <canvas id="salesChart" height="100"></canvas>
+    </div>
+</div>
+
+<script>
+    const salesData = @Html.Raw(System.Text.Json.JsonSerializer.Serialize(ViewBag.SalesTrend));
+
+    const ctx = document.getElementById('salesChart').getContext('2d');
+    const salesChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: salesData.map(d => d.Date),
+            datasets: [{
+                label: 'Sales',
+                data: salesData.map(d => d.Total),
+                fill: true,
+                backgroundColor: 'rgba(33, 150, 243, 0.2)',
+                borderColor: '#2196F3',
+                tension: 0.4,
+                borderWidth: 3,
+                pointRadius: 5,
+                pointBackgroundColor: '#2196F3'
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: { legend: { display: false } },
+            scales: {
+                y: { beginAtZero: true, ticks: { color: '#333' } },
+                x: { ticks: { color: '#333' } }
+            }
+        }
+    });
+</script>

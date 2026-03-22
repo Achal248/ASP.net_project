@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container mt-5 d-flex justify-content-center">
+
+    <div class="card shadow-sm border-0"
+         style="width: 520px; border-radius:18px; overflow:hidden;">
+
+        <!-- Gradient Header -->
+        <div class="card-header border-0"
+             style="background: linear-gradient(135deg, #eaf6ff, #d6ecff);
+                    border-top-left-radius:18px;
+                    border-top-right-radius:18px;">
+
+            <h5 class="mb-0 fw-semibold text-dark">
+                👤 My Profile
+            </h5>
+        </div>
+
+        <div class="card-body p-4">
+
+            <div class="mb-4">
+                <label class="text-muted small">Full Name</label>
+                <div class="fs-5 fw-semibold">@ViewBag.Name</div>
+            </div>
+
+            <div class="mb-4">
+                <label class="text-muted small">Email Address</label>
+                <div class="fs-5 fw-semibold">@ViewBag.Email</div>
+            </div>
+            <div class="mb-4">
+                <label class="text-muted small">Phone Number</label>
+                <div class="fs-5 fw-semibold">1234567890</div>
+            </div>
+            <div class="mb-4">
+                <label class="text-muted small">Address</label>
+                <div class="fs-5 fw-semibold">Gujarat, India.</div>
+            </div>
+            <hr class="my-4" style="opacity:0.1;" />
+
+            <a asp-action="Logout"
+               class="btn w-100 text-white"
+               style="background-color:#2d9cdb;
+                      border-radius:12px;
+                      padding:10px 0;">
+
+                Logout
+            </a>
+
+        </div>
+    </div>
+
+</div>

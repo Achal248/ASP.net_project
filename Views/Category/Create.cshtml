@@ -1,0 +1,94 @@
+﻿@model ColorFill.Models.Category
+
+@{
+    ViewData["Title"] = "Add Category";
+}
+
+<style>
+    .soft-card {
+        border-radius: 18px;
+        overflow: hidden;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.05);
+        border: none;
+    }
+
+    .soft-header {
+        background: linear-gradient(135deg, #eaf6ff, #d6ecff);
+        ;
+        padding: 18px 25px;
+    }
+
+        .soft-header h4 {
+            margin: 0;
+            font-weight: 600;
+            color: #2f3e4d;
+        }
+
+    .soft-input {
+        border-radius: 12px;
+        padding: 10px 14px;
+    }
+
+    .soft-btn {
+        background-color: #2d9cdb;
+        color: white;
+        border-radius: 12px;
+        padding: 10px 24px;
+        border: none;
+        transition: 0.3s ease;
+    }
+
+        .soft-btn:hover {
+            background-color: #4e6578;
+        }
+
+    .soft-outline {
+        border-radius: 12px;
+        padding: 10px 24px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="card soft-card">
+
+        <div class="soft-header">
+            <h4> Add New Category</h4>
+        </div>
+
+        <div class="card-body p-4">
+
+            <form asp-action="Create" method="post">
+
+                <div class="mb-4">
+                    <label class="form-label text-muted">Category Name</label>
+                    <input asp-for="Name"
+                           class="form-control soft-input"
+                           placeholder="Enter category name"
+                           required />
+                </div>
+
+                <div class="mb-4">
+                    <label class="form-label text-muted">Description</label>
+                    <textarea asp-for="Description"
+                              class="form-control soft-input"
+                              rows="3"
+                              placeholder="Optional description"></textarea>
+                </div>
+
+                <div class="d-flex justify-content-between mt-4">
+                    <a asp-action="Index"
+                       class="btn btn-outline-secondary soft-outline">
+                        ← Back
+                    </a>
+
+                    <button type="submit"
+                            class="soft-btn">
+                        Save Category
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

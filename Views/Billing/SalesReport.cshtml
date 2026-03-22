@@ -1,0 +1,101 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    ViewData["Title"] = "Sales Report";
+    var report = ViewBag.Report;
+
+    decimal totalSales = 0;
+    decimal totalCost = 0;
+    int totalBills = 0;
+
+    if (report != null)
+    {
+        object salesObj = report["TotalSales"];
+        object costObj = report["TotalCost"];
+        object billsObj = report["TotalBills"];
+
+        totalSales = salesObj == DBNull.Value ? 0 : Convert.ToDecimal(salesObj);
+        totalCost = costObj == DBNull.Value ? 0 : Convert.ToDecimal(costObj);
+        totalBills = billsObj == DBNull.Value ? 0 : Convert.ToInt32(billsObj);
+    }
+
+    decimal profit = totalSales - totalCost;
+    decimal margin = totalSales > 0 ? (profit / totalSales) * 100 : 0;
+}
+
+<div class="container mt-4">
+
+    <h2 class="text-center mb-4">📊 Sales Report Dashboard</h2>
+
+    <!-- DATE FILTER -->
+    <div class="card shadow p-3 mb-4">
+        <form method="get" asp-action="SalesReport">
+            <div class="row">
+                <div class="col-md-4">
+                    <label>From Date</label>
+                    <input type="date" name="fromDate"
+                           value="@ViewBag.FromDate?.ToString("yyyy-MM-dd")"
+                           class="form-control" />
+                </div>
+
+                <div class="col-md-4">
+                    <label>To Date</label>
+                    <input type="date" name="toDate"
+                           value="@ViewBag.ToDate?.ToString("yyyy-MM-dd")"
+                           class="form-control" />
+                </div>
+
+                <div class="col-md-4 d-flex align-items-end">
+                    <button type="submit" class="btn btn-primary w-100">
+                        🔍 Filter Report
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- SUMMARY CARDS -->
+    <div class="row text-center mt-4">
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 bg-primary text-white">
+                <h5>Total Bills</h5>
+                <h3>@totalBills</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 bg-success text-white">
+                <h5>Total Sales</h5>
+                <h3>₹ @totalSales</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 bg-warning text-dark">
+                <h5>Total Cost</h5>
+                <h3>₹ @totalCost</h3>
+            </div>
+        </div>
+
+        <div class="col-md-3">
+            <div class="card shadow p-4 bg-dark text-white">
+                <h5>Total Profit</h5>
+                <h3>₹ @profit</h3>
+                <small>Margin: @margin.ToString("0.00") %</small>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BACK BUTTON -->
+    <div class="mt-4 text-center">
+        <a asp-controller="Stock" asp-action="Index"
+           class="btn btn-secondary">
+            ← Back to Stock
+        </a>
+    </div>
+
+</div>
