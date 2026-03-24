@@ -1,0 +1,102 @@
+﻿@model ColorFill.Models.BillViewModel
+@{
+    ViewData["Title"] = "Billing";
+}
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">Billing System</h2>
+
+    <div class="billing-card p-4">
+
+        <table class="billing-table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                    <th>Remove</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.CartItems.Any())
+                {
+                    foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td>@item.ProductName</td>
+                            <td>₹ @item.SellingPrice</td>
+                            <td>
+                                <form asp-action="UpdateQuantity" method="post" class="d-flex justify-content-center gap-2">
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+
+                                    <input type="number"
+                                           name="quantity"
+                                           value="@item.Quantity"
+                                           min="1"
+                                           class="billing-qty-input" />
+
+                                    <button type="submit" class="btn-figma">
+                                        Update
+                                    </button>
+                                </form>
+                            </td>
+                            <td>₹ @item.Total</td>
+                            <td>
+                                <a asp-action="Remove"
+                                   asp-route-productId="@item.ProductId"
+                                   class="delete-btn">
+                                    Remove
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td colspan="5" class="text-center text-muted">
+                            No items added to bill.
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <div class="text-end mt-4">
+            <h4>
+                Grand Total:
+                <span style="color:#2d9cdb;">₹ @Model.GrandTotal</span>
+            </h4>
+        </div>
+
+    </div>
+
+    <!-- SAVE BILL -->
+    <div class="billing-card p-4 mt-4">
+        <form asp-action="SaveBill" method="post" class="row g-3">
+
+            <div class="col-md-8">
+                <input type="text"
+                       name="customerName"
+                       class="form-control"
+                       placeholder="Customer Name (Optional)" />
+            </div>
+
+            <div class="col-md-4 text-end">
+                <button type="submit" class="btn-figma w-100">
+                    Save Bill
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="mt-4">
+        <a asp-controller="Stock" asp-action="Index" class="btn-figma">
+            ← Back to Stock
+        </a>
+    </div>
+
+</div>

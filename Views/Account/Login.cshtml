@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿@model ASP.net_project.Models.Login
 
 @{
@@ -41,3 +42,72 @@
 
 </body>
 </html>
+=======
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<style>
+    .login-card {
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        border: none;
+    }
+
+    .login-header {
+        background: linear-gradient(135deg, #eaf6ff, #d6ecff);
+        padding: 20px;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .login-btn {
+        background-color: #2d9cdb;
+        border-radius: 12px;
+        color: white;
+        padding: 10px;
+        border: none;
+    }
+
+        .login-btn:hover {
+            background-color: #4e6578;
+        }
+</style>
+
+<div class="container mt-5 d-flex justify-content-center">
+    <div class="card login-card col-md-5">
+
+        <div class="login-header text-center">
+            <h4> Login</h4>
+        </div>
+
+        <div class="card-body p-4">
+
+            @if (ViewBag.Error != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.Error
+                </div>
+            }
+
+            <form method="post">
+
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="email" name="email" class="form-control" required />
+                </div>
+
+                <div class="mb-4">
+                    <label>Password</label>
+                    <input type="password" name="password" class="form-control" required />
+                </div>
+
+                <button type="submit" class="login-btn w-100">
+                    Login
+                </button>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+>>>>>>> main

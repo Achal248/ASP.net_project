@@ -1,0 +1,134 @@
+﻿@{
+    var bill = ViewBag.Bill;
+    var items = ViewBag.Items as System.Data.DataTable;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Invoice - ColorFill</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .invoice-box {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .invoice-header {
+            border-bottom: 2px solid #000;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+        }
+
+        .brand-title {
+            font-weight: bold;
+            font-size: 28px;
+            color: #0d6efd;
+        }
+
+        .table th {
+            text-align: center;
+        }
+
+        .table td {
+            vertical-align: middle;
+        }
+
+        .grand-total {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        @@media print {
+            .no-print {
+                display: none;
+            }
+
+            body {
+                background: white;
+            }
+
+            .invoice-box {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="invoice-box">
+
+            <div class="row invoice-header">
+                <div class="col-md-6">
+                    <div class="brand-title"> ColorFill Paint Store</div>
+                    <div> Paint Shop</div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <strong>Invoice</strong><br />
+                    <small>Date: @Convert.ToDateTime(bill["CreatedDate"]).ToString("dd MMM yyyy")</small>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-6">
+                    <strong>Bill Number:</strong> @bill["BillNumber"] <br />
+                    <strong>Customer:</strong> @(string.IsNullOrEmpty(bill["CustomerName"].ToString()) ? "Walk-in Customer" : bill["CustomerName"])
+                </div>
+            </div>
+
+            <table class="table table-bordered">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Product</th>
+                        <th width="100">Qty</th>
+                        <th width="120">Price</th>
+                        <th width="120">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (System.Data.DataRow row in items.Rows)
+                    {
+                        <tr>
+                            <td>@row["Name"]</td>
+                            <td class="text-center">@row["Quantity"]</td>
+                            <td class="text-end">₹ @row["Price"]</td>
+                            <td class="text-end">₹ @row["Total"]</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="text-end mt-3">
+                <div class="grand-total">
+                    Grand Total: ₹ @bill["TotalAmount"]
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="text-center mt-3">
+                <p class="mb-1">Thank you for your business!</p>
+                <small>Visit Again </small>
+            </div>
+
+            <div class="text-center mt-4 no-print">
+                <button onclick="window.print()" class="btn btn-primary px-4">
+                    🖨 Print Invoice
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+﻿@model IEnumerable<ColorFill.Models.BillViewModel>
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+@{
+    ViewData["Title"] = "Billing History";
+}
+
+<div class="container mt-4">
+
+    <!-- Top Filters -->
+    <div class="d-flex flex-wrap gap-3 mb-4 align-items-center">
+
+        <button class="btn rounded-pill px-4"
+                style="background: linear-gradient(135deg, #eaf6ff, #d6ecff);
+                       border:1px solid #bcdffb;">
+            Filter by Status
+        </button>
+
+        <input type="text"
+               placeholder="Search by name"
+               class="form-control rounded-pill"
+               style="max-width:250px; background:#f2f2f2; border:none;" />
+
+        <button class="btn rounded-pill px-4"
+                style="background:#f2f2f2; border:1px solid #ccc;">
+            Filter by Date
+        </button>
+
+        <a class="btn text-white rounded-pill px-4 ms-auto"
+           style="background-color:#2d9cdb;">
+            Download PDF
+        </a>
+    </div>
+
+    <!-- Billing Table -->
+    <div class="card shadow-sm border-0" style="border-radius:18px; overflow:hidden;">
+
+        <div class="table-responsive">
+            <table class="table align-middle mb-0">
+
+                <thead style="background: linear-gradient(135deg, #eaf6ff, #d6ecff);">
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Total Amount</th>
+                        <th>Quantity (L/Kg)</th>
+                        <th>Payment Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    @foreach (var bill in Model)
+                    {
+                        <tr style="background-color:#f9f9f9;">
+                            <td>@bill.CustomerName</td>
+                            <td>@bill.CartItems</td>
+                            @* <td>₹@bill.GrandTotal</td>
+                            <td class="fw-semibold">@bill.Quantity</td>
+                            <td>@bill.PaymentDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                @if (bill.Status == "Paid")
+                                {
+                                    <span class="badge rounded-pill px-3 py-2"
+                                          style="background-color:#5cc08a;">
+                                        Paid
+                                    </span>
+                                }
+                                else if (bill.Status == "Partial")
+                                {
+                                    <span class="badge rounded-pill px-3 py-2"
+                                          style="background-color:#f2a65a;">
+                                        Partial
+                                    </span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill px-3 py-2"
+                                          style="background-color:#2d9cdb;">
+                                        Pending
+                                    </span>
+                                }
+                            </td> *@
+                        </tr>
+                    }
+
+                </tbody>
+
+            </table>
+        </div>
+
+    </div>
+
+</div>

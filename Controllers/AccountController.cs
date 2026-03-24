@@ -1,6 +1,7 @@
 ﻿using ColorFill.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages.Manage;
 using System.Data;
 using System.Data.SqlClient;
 using SqlParameter = Microsoft.Data.SqlClient.SqlParameter;
@@ -28,7 +29,7 @@ namespace ColorFill.Controllers
 
             SqlParameter[] parameters =
             {
-            new SqlParameter("@Email", email),
+            new SqlParameter("@Email", Email),
             new SqlParameter("@Password", password)
         };
 

@@ -1,0 +1,57 @@
+﻿@model ColorFill.Models.Product
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Add Product";
+}
+<h2 class="mb-4">Add New Product</h2>
+
+<form asp-action="Create" method="post" class="card p-4">
+
+    <div class="mb-3">
+        <label class="form-label">Product Name</label>
+        <input asp-for="Name" class="form-control" required />
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Category</label>
+        <select asp-for="CategoryId" class="form-select" required>
+            <option value="">Select Category</option>
+            @foreach (var cat in ViewBag.Categories)
+            {
+                <option value="@cat.Id">@cat.Name</option>
+            }
+        </select>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Cost Price</label>
+            <input asp-for="CostPrice" type="number" step="0.01" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Selling Price</label>
+            <input asp-for="SellingPrice" type="number" step="0.01" class="form-control" required />
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Quantity</label>
+            <input asp-for="Quantity" type="number" class="form-control" required />
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label class="form-label">Low Stock Alert Limit</label>
+            <input asp-for="LowStockThreshold" type="number" class="form-control" value="5" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">Save Product</button>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
+
+</form> 
