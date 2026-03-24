@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
+using SqlParameter = Microsoft.Data.SqlClient.SqlParameter;
+
 
 namespace ColorFill.Controllers
 {
