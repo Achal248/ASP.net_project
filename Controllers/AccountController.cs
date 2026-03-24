@@ -1,41 +1,67 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ASP.net_project.Models;
+﻿using ColorFill.Data;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using System.Data;
+using System.Data.SqlClient;
+using SqlParameter = Microsoft.Data.SqlClient.SqlParameter;
 
-namespace ASP.net_project.Controllers
+
+namespace ColorFill.Controllers
 {
     public class AccountController : Controller
     {
+        private readonly DbHelper _db;
+
+        public AccountController(DbHelper db)
+        {
+            _db = db;
+        }
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult Login(Login model)
+        public IActionResult Login(string egit chekout mastremail, string password)
         {
-            string fixedEmail = "admin@gmail.com";
-            string fixedPassword = "12345";
+            string query = "SELECT * FROM Users WHERE Email=@Email AND Password=@Password";
 
-            if (model.Email == fixedEmail && model.Password == fixedPassword)
+            SqlParameter[] parameters =
             {
-                HttpContext.Session.SetString("UserName", model.Email);
+            new SqlParameter("@Email", email),
+            new SqlParameter("@Password", password)
+        };
+
+            DataTable dt = _db.ExecuteSelect(query, parameters);
+
+            if (dt.Rows.Count > 0)
+            {
+                HttpContext.Session.SetString("UserName", dt.Rows[0]["FullName"].ToString());
+                HttpContext.Session.SetString("UserEmail", dt.Rows[0]["Email"].ToString());
+
                 return RedirectToAction("Index", "Home");
             }
 
-            ViewBag.Error = "Invalid Email or Password";
-            return View(model);
-        }
-
-        public IActionResult Register()
-        {
+            ViewBag.Error = "Invalid email or password";
             return View();
         }
 
-        
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("UserName");
+            HttpContext.Session.Clear();
             return RedirectToAction("Login");
+        }
+
+        public IActionResult Profile()
+        {
+            if (HttpContext.Session.GetString("UserName") == null)
+                return RedirectToAction("Login");
+
+            ViewBag.Name = HttpContext.Session.GetString("UserName");
+            ViewBag.Email = HttpContext.Session.GetString("UserEmail");
+
+            return View();
         }
     }
 }
+
